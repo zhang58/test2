@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD mapper 3.1//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.StandsMapper">
+  <select id="selectAll" resultType="pojo.stands">
+    select * from stands
+    <where>
+      <if test="name!=null and name!=''">
+        and name like CONCAT ('%',#{name},'%')
+      </if>
+    </where>
+    limit #{num},#{pageSize}
+  </select>
+  
+  <select id="count" resultType="_int">
+    select count(1) from stands
+    <where>
+      <if test="name!=null and name!=''">
+        and name like CONCAT ('%',#{name},'%')
+      </if>
+    </where>
+  </select>
+  
+  <insert id="insert" parameterType="pojo.stands">
+    insert into stands(
+    std_name,
+    name,
+    version,
+    `keys`,
+    r_date,
+    i_date,
+    path
+    )
+    values(
+    #{std_name},
+    #{name},
+    #{version},
+    #{keys},
+    #{r_date},
+    #{i_date},
+    #{path}
+    )
+  </insert>
+  
+  <select id="selectId" resultType="pojo.stands">
+    select * from stands
+    where id=#{id}
+  </select>
+  
+  <update id="update" parameterType="pojo.stands">
+  update stands set
+  std_name=#{std_name},
+  name=#{name},
+  version=#{version},
+  `keys`=#{keys},
+  r_date=#{r_date},
+  i_date=#{i_date},
+  path=#{path}
+  where id=#{id}
+  </update>
+  
+  <delete id="delete" parameterType="_int">
+    delete from stands where id=#{id}
+  </delete>
+</mapper>
