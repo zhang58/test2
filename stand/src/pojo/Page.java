@@ -1,7 +1,7 @@
 package pojo;
 
 public class Page {
-	private int currenPageNo=1;
+	private int currenPageNo=3;
 	private int pageSize=3;
 	private int totalCount;
 	private int totalPageCount;
